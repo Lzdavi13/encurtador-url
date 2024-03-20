@@ -5,17 +5,23 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsx watch ./src/server.ts"
+    "start": "tsx watch ./src/server.ts",
+    "knex:migrate": "knex --knexfile ./src/database/knex/Environment.ts migrate:latest",
+    "knex:rollback": "knex --knexfile ./src/database/knex/Environment.ts migrate:rollback",
+    "knex:rollback-all": "knex --knexfile ./src/database/knex/Environment.ts migrate:rollback --all"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.11.30",
+    "ts-node-dev": "^2.0.0",
     "tsx": "^4.7.1",
     "typescript": "^5.4.2"
   },
   "dependencies": {
-    "fastify": "^4.26.2"
+    "fastify": "^4.26.2",
+    "knex": "^3.1.0",
+    "pg": "^8.11.3"
   }
 }
