@@ -1,8 +1,10 @@
 import { HttpException } from "../helpers/HttpExceptions";
 import { CreateLinkDto } from "../interfaces/CreateLink.dto";
+import { GetCodeDto } from "../interfaces/GetCode.dto";
 import { Link } from "../interfaces/ILink";
 import { ILinkRepository } from "../interfaces/ILinkRepository";
 import { schemaCreateLink } from "../schemas/createLink";
+import { schemaParams } from "../schemas/schemaParams";
 
 
 export class LinkService {
@@ -21,4 +23,17 @@ export class LinkService {
 
     return link
   }
+
+  async getLink(getCodeDto: GetCodeDto): Promise<Link> {
+    const { code } = schemaParams.parse(getCodeDto)
+
+    const result = await this.repository.findByCode(code)
+
+    if (!result) {
+      throw new HttpException("Link not found", 404)
+    }
+
+    return result
+  }
+
 }
