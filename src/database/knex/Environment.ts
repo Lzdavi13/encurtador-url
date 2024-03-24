@@ -6,8 +6,9 @@ export const development: Knex.Config = {
   connection: {
     host: "localhost",
     port: 5435,
-    user: "pguser",
+    user: "pgdocker",
     password: "pgpassword",
+    database: "shortlinks"
   },
   migrations: {
     tableName: "knex_migrations",
@@ -16,8 +17,23 @@ export const development: Knex.Config = {
 };
 
 export const test: Knex.Config = {
-  ...development,
-  connection: ":memory:"
+  client: 'sqlite3',
+  useNullAsDefault: true,
+  connection: ':memory:',
+  migrations: {
+    tableName: "knex_migrations",
+    directory: path.resolve(__dirname, '..', 'migrations'),
+  },
+  pool: {
+    afterCreate: (connection: any, done: Function) => {
+      connection.run('PRAGMA foreign_keys = ON');
+      done();
+    }
+  }
+}
+
+export const production: Knex.Config = {
+  ...development
 }
 
 
