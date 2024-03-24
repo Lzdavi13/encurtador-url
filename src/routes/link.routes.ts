@@ -36,4 +36,11 @@ export async function linkRoutes(app: FastifyInstance) {
       return reply.code(500).send({ status_code: 500, message: 'Internal server errror' })
     }
   })
+
+  app.get("/links", async (request, reply) => {
+
+    const links = await linkService.getAllLinks()
+
+    return reply.code(200).send(links)
+  })
 }
