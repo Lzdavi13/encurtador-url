@@ -17,4 +17,9 @@ export class LinkRepository implements ILinkRepository {
 
     return result
   }
+  async getAll(): Promise<Link[]> {
+    const result = await this.knex.select("*").from<Link>("short_links").orderBy('created_at', 'desc')
+
+    return result
+  }
 }

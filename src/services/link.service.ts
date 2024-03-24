@@ -35,5 +35,9 @@ export class LinkService {
 
     return result
   }
+  async getAllLinks(): Promise<Link[]> {
+    const links = await this.repository.getAll()
 
+    return links
+  }
 }
