@@ -134,3 +134,5 @@ dist
 
 .env
 *.sqlite
+
+.db-postgres-bitname

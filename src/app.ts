@@ -8,4 +8,3 @@ const app = Fastify()
 app.register(linkRoutes)
 
 export { app }
-

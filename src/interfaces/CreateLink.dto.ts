@@ -1,4 +1,4 @@
 export interface CreateLinkDto {
-  code: string;
+  code: string
   url: string
 }
